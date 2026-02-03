@@ -9,7 +9,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 00-vpc
+                        cd 20-bastion
                         terraform init
                     '''
                 }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                         cd 00-vpc
+                         cd 20-bastion
                          terraform plan
                     '''
                 }  
@@ -34,20 +34,17 @@ pipeline {
                 // )
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 00-vpc
+                        cd 20-bastion
                         terraform apply -auto-approve
                     '''
                 }
             }
         }
-        stage ('10-sg') {
-            steps {
-                script {
-                    build job: '10-sg',
-                    wait: false,  // waits for the completion of first job before starting this job
-                    propagate: false 
-                }
-            }
+    }
+    post {
+        always {
+            echo "cleaning up workspace ..."
+            cleanWs()
         }
     }
 }

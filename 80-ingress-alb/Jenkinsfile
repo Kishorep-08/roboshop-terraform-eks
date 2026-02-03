@@ -9,7 +9,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 30-sg-rules
+                        cd 80-ingress-alb
                         terraform init
                     '''
                 }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                         cd 30-sg-rules
+                         cd 80-ingress-alb
                          terraform plan
                     '''
                 }  
@@ -31,10 +31,10 @@ pipeline {
                 // input (
                 //     message: 'Do you want to apply the changes?',
                 //     ok: 'Apply'
-                )
+                // )
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 30-sg-rules
+                        cd 80-ingress-alb
                         terraform apply -auto-approve
                     '''
                 }

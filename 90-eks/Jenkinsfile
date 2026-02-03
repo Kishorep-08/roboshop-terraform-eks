@@ -31,7 +31,7 @@ pipeline {
                 // input (
                 //     message: 'Do you want to apply the changes?',
                 //     ok: 'Apply'
-                )
+                // )
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
                         cd 90-eks
