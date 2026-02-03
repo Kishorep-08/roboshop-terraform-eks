@@ -1,0 +1,43 @@
+pipeline {
+    agent {
+        node {
+            label 'agent-1'
+        }
+    }
+    stages {
+        stage ('init') {
+            steps {
+                script {
+                    sh '''
+                        cd 10-sg
+                        terraform init
+                    '''
+                }
+            }
+        }
+        stage ('plan') {
+            steps {
+                script {
+                    sh '''
+                        cd 10-sg
+                        terraform plan
+                    '''
+                }
+            }
+        }
+        stage ('apply') {
+            steps {
+                input (
+                    message: 'Do you want to apply the changes?',
+                    ok: 'Apply'
+                )
+                script {
+                    sh '''
+                        cd 10-sg
+                        terraform apply -auto-approve
+                    '''
+                }
+            }
+        }
+    }
+}
