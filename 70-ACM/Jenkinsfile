@@ -9,7 +9,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 70-acm
+                        cd 70-ACM
                         terraform init
                     '''
                 }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                         cd 70-acm
+                         cd 70-ACM
                          terraform plan
                     '''
                 }  
@@ -34,7 +34,7 @@ pipeline {
                 // )
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 70-acm
+                        cd 70-ACM
                         terraform apply -auto-approve
                     '''
                 }

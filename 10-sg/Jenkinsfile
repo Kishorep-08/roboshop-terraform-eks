@@ -31,10 +31,10 @@ pipeline {
         }
         stage ('apply') {
             steps {
-                input (
-                    message: 'Do you want to apply the changes?',
-                    ok: 'Apply'
-                )
+                // input (
+                //     message: 'Do you want to apply the changes?',
+                //     ok: 'Apply'
+                // )
                 script {
                     withAWS(region:'us-east-1',credentials:'aws-auth') {
                         sh '''
