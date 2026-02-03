@@ -8,20 +8,24 @@ pipeline {
         stage ('init') {
             steps {
                 script {
-                    sh '''
-                        cd 10-sg
-                        terraform init
-                    '''
+                    withAWS(region:'us-east-1',credentials:'aws-auth') {
+                        sh '''
+                            cd 10-sg
+                            terraform init
+                        '''
+                    }
                 }
             }
         }
         stage ('plan') {
             steps {
                 script {
-                    sh '''
-                        cd 10-sg
-                        terraform plan
-                    '''
+                    withAWS(region:'us-east-1',credentials:'aws-auth') {
+                        sh '''
+                            cd 10-sg
+                            terraform plan
+                        '''
+                    }
                 }
             }
         }
@@ -32,10 +36,12 @@ pipeline {
                     ok: 'Apply'
                 )
                 script {
-                    sh '''
-                        cd 10-sg
-                        terraform apply -auto-approve
-                    '''
+                    withAWS(region:'us-east-1',credentials:'aws-auth') {
+                        sh '''
+                            cd 10-sg
+                            terraform apply -auto-approve
+                        '''
+                    }
                 }
             }
         }
