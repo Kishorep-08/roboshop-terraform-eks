@@ -40,5 +40,14 @@ pipeline {
                 }
             }
         }
+        stage ('10-sg') {
+            steps {
+                script {
+                    build job: '10-sg',
+                    wait: true,  // waits for the completion of first job before starting this job
+                    propogate: false 
+                }
+            }
+        }
     }
 }
