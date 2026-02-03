@@ -9,7 +9,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 00-vpc
+                        cd 30-sg-rules
                         terraform init
                     '''
                 }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                         cd 00-vpc
+                         cd 30-sg-rules
                          terraform plan
                     '''
                 }  
@@ -28,26 +28,23 @@ pipeline {
         }
         stage ('apply') {
             steps {
-                input (
-                    message: 'Do you want to apply the changes?',
-                    ok: 'Apply'
+                // input (
+                //     message: 'Do you want to apply the changes?',
+                //     ok: 'Apply'
                 )
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                        cd 00-vpc
+                        cd 30-sg-rules
                         terraform apply -auto-approve
                     '''
                 }
             }
         }
-        stage ('10-sg') {
-            steps {
-                script {
-                    build job: '10-sg',
-                    wait: false,  // waits for the completion of first job before starting this job
-                    propagate: false 
-                }
-            }
+    }
+    post {
+        always {
+            echo "cleaning up workspace ..."
+            cleanWs()
         }
     }
 }
