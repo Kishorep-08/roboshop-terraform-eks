@@ -20,8 +20,8 @@ pipeline {
             steps {
                 withAWS(region:'us-east-1',credentials:'aws-auth') {
                     sh '''
-                         cd 30-sg-rules
-                         terraform plan
+                        cd 30-sg-rules
+                        terraform plan
                     '''
                 }  
             }
