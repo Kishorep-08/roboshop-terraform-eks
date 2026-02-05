@@ -10,6 +10,8 @@ pipeline {
                 script {
                     withAWS(region:'us-east-1',credentials:'aws-auth') {
                         sh '''
+                            pwd
+                            ls -l
                             cd 10-sg
                             terraform init
                         '''
