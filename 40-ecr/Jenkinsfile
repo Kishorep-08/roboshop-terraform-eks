@@ -26,6 +26,7 @@ pipeline {
                 }  
             }
         }
+        // Terraform apply
         stage ('apply') {
             steps {
                 // input (
