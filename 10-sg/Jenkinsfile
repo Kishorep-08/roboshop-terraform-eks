@@ -49,21 +49,21 @@ pipeline {
         }
         stage ('Parallel stages') {
             parallel { 
-                stage ('sg rules') {
-                    steps {
-                        script {
-                            build job: '../30-sg-rules',
-                            wait: false,  
-                            propagate: false
-                        }
-                    }
-                }
                 stage ('Bastion') {
                     steps {
                         script {
                             build job: '../20-bastion',
-                            wait: false,  
-                            propagate: false
+                                wait: false,  
+                                propagate: false
+                        }
+                    }
+                }
+                stage ('sg rules') {
+                    steps {
+                        script {
+                            build job: '../30-sg-rules',
+                                wait: false,  
+                                propagate: false
                         }
                     }
                 }
@@ -71,8 +71,8 @@ pipeline {
                     steps {
                         script {
                             build job: '../70-ACM',
-                            wait: false,  
-                            propagate: false
+                                wait: false,  
+                                propagate: false
                         }
                     }
                 }
@@ -81,8 +81,8 @@ pipeline {
                     steps {
                         script {
                             build job: '../90-eks',
-                            wait: false,  
-                            propagate: false
+                                wait: false,  
+                                propagate: false
                         }
                     }
                 }
@@ -90,8 +90,8 @@ pipeline {
                     steps {
                         script {
                             build job: '../40-ecr',
-                            wait: false,  
-                            propagate: false
+                                wait: false,  
+                                propagate: false
                         }
                     }
                 }
@@ -102,8 +102,8 @@ pipeline {
             steps {
                 script {
                     build job: '80-ingress-alb',
-                    wait: false,  
-                    propagate: false 
+                        wait: false,  
+                        propagate: false 
                 }
             }
         }
