@@ -3,7 +3,7 @@ resource "aws_instance" "bastion" {
   instance_type = "t3.micro"
   vpc_security_group_ids = [local.bastion_sg_id]
   subnet_id = local.public_subnet_ids
-  iam_instance_profile = "ec2admin"
+  iam_instance_profile = "arn:aws:iam::997416683845:instance-profile/ec2admin"
   root_block_device {
     volume_size = 50
   }
