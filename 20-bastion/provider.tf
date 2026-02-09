@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "kishore-remote-state-dev"   # name of your S3 bucket
+    bucket = "kishore-remote-state-tf"   # name of your S3 bucket
     key    = "roboshop-eks-bastion"   # name of the file to store the state
     region = "us-east-1"
     use_lockfile = true
